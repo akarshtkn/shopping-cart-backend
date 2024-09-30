@@ -1,5 +1,6 @@
 package com.project.shopping_cart.service.serviceImpl;
 
+import com.project.shopping_cart.dto.ProductDto;
 import com.project.shopping_cart.dto.request.AddProductRequest;
 import com.project.shopping_cart.dto.request.UpdateProductRequest;
 import com.project.shopping_cart.exception.ResourceNotFoundException;
@@ -9,8 +10,10 @@ import com.project.shopping_cart.repository.ProductRepo;
 import com.project.shopping_cart.service.CategoryService;
 import com.project.shopping_cart.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final CategoryService categoryService;
     private final ProductRepo repository;
+    private final ModelMapper modelMapper;
 
     @Override
     public Product addProduct(AddProductRequest request) {
@@ -104,5 +108,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Long countProductsByBrandAndName(String brand, String name) {
         return repository.countByBrandAndName(brand, name);
+    }
+
+    @Override
+    public List<ProductDto> convertProductListToProductDtoList(List<Product> products) {
+        return products.stream()
+                .map(product -> modelMapper.map(product, ProductDto.class))
+                .toList();
     }
 }
