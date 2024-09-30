@@ -1,5 +1,6 @@
 package com.project.shopping_cart.service;
 
+import com.project.shopping_cart.dto.ProductDto;
 import com.project.shopping_cart.dto.request.AddProductRequest;
 import com.project.shopping_cart.dto.request.UpdateProductRequest;
 import com.project.shopping_cart.model.Product;
@@ -30,4 +31,5 @@ public interface ProductService {
 
     Long countProductsByBrandAndName(String brand, String name);
 
+    List<ProductDto> convertProductListToProductDtoList(List<Product> products);
 }

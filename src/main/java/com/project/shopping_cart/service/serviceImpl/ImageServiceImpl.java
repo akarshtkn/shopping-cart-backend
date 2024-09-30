@@ -57,8 +57,8 @@ public class ImageServiceImpl implements ImageService {
                 repository.save(savedImage);
 
                 ImageDto imageDto = ImageDto.builder()
-                        .imageId(savedImage.getId())
-                        .imageName(savedImage.getFileName())
+                        .id(savedImage.getId())
+                        .fileName(savedImage.getFileName())
                         .downloadUrl(savedImage.getDownloadUrl())
                         .build();
                 savedImageDto.add(imageDto);
