@@ -31,6 +31,7 @@ public class ProductController {
     @PutMapping("/product/update/{id}")
     public ResponseEntity<ApiResponse> updateProduct(
             @PathVariable Long id, @RequestBody UpdateProductRequest product) {
+        System.out.println("hi");
         return ResponseEntity.ok()
                 .body(new ApiResponse("Update success", productService.updateProduct(product, id)));
     }

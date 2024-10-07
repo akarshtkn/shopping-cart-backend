@@ -64,14 +64,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private Product updateExistingProduct(Product existingProduct, UpdateProductRequest request) {
-        existingProduct.setName(request.getName());
-        existingProduct.setBrand(request.getBrand());
-        existingProduct.setPrice(request.getPrice());
-        existingProduct.setInventory(request.getInventory());
-        existingProduct.setDescription(request.getDescription());
+        System.out.println("inside");
+        if(!request.getName().isBlank()) {
+            existingProduct.setName(request.getName());
+        }
 
-        Category category = categoryService.findCategoryByNameIfExistOrElseCreateNew(request.getCategory().getName());
-        existingProduct.setCategory(category);
+        if(!request.getBrand().isBlank()) {
+            existingProduct.setBrand(request.getBrand());
+        }
+
+        if(request.getPrice() != null) {
+            existingProduct.setPrice(request.getPrice());
+        }
+
+        existingProduct.setInventory(request.getInventory());
+
+        if(!request.getDescription().isBlank()) {
+            existingProduct.setDescription(request.getDescription());
+        }
+
+        if(!request.getCategory().getName().isBlank()) {
+            Category category = categoryService.findCategoryByNameIfExistOrElseCreateNew(request.getCategory().getName());
+            existingProduct.setCategory(category);
+        }
         return existingProduct;
     }
 

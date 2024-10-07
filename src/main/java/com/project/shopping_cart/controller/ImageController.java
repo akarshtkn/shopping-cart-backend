@@ -42,14 +42,14 @@ public class ImageController {
                 .body(resource);
     }
 
-    @PutMapping("/image/{imageId}/update")
+    @PutMapping("/image/update/{imageId}")
     public ResponseEntity<ApiResponse> updateImage(@PathVariable Long imageId, @RequestBody MultipartFile file) {
         Image image = imageService.getImageById(imageId);
         imageService.updateImage(file, imageId);
         return ResponseEntity.ok(new ApiResponse("Update success", null));
     }
 
-    @DeleteMapping("/image/{imageId}/delete")
+    @DeleteMapping("/image/delete/{imageId}")
     public ResponseEntity<ApiResponse> deleteImage(@PathVariable Long imageId) {
         Image image = imageService.getImageById(imageId);
         imageService.deleteImageById(imageId);
